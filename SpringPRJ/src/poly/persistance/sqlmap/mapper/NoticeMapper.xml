@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.NoticeMapper">
+
+	<select id="getNoticeList" resultType="NoticeDTO">
+	SELECT 
+		notice_seq, 
+		title, 
+		notice_yn,
+		contents,
+		user_id, 
+		read_cnt,
+		reg_id,
+		reg_dt,
+		chg_id,
+		chg_dt
+	FROM 
+		notice	
+		
+		
+	</select>
+	
+	<select id="getNotice" parameterType="string" resultType="NoticeDTO">
+	SELECT 
+		notice_seq, 
+		title, 
+		notice_yn,
+		contents,
+		user_id, 
+		read_cnt,
+		reg_id,
+		reg_dt,
+		chg_id,
+		chg_dt 
+	FROM 
+		notice
+	WHERE (notice_seq = #{bno})	
+		
+		
+	</select>
+	
+
+
+<select id="getNoticeInfo" resultType="NoticeDTO" >
+	SELECT 
+		notice_seq, 
+		title, 
+		notice_yn,
+		contents,
+		user_id, 
+		read_cnt,
+		reg_id,
+		reg_dt,
+		chg_id,
+		chg_dt 
+	FROM 
+		notice	
+		WHERE
+		notice_seq=#{notice_seq}
+</select>
+
+<insert id="InsertNotice" parameterType="NoticeDTO" >
+INSERT 
+INTO notice(
+title,
+notice_yn,
+contents,
+user_id,
+reg_id,
+reg_dt
+)
+VALUES (
+#{title},
+1,
+#{contents},
+#{user_id},
+#{user_id},
+sysDate() 
+)
+</insert>
+
+<!-- 공지사항 삭제 -->
+<delete id="DeleteNotice" parameterType="NoticeDTO">
+DELETE FROM NOTICE WHERE notice_seq=#{notice_seq}
+</delete>
+
+
+<!-- 공지사항 수정 -->
+<update id ="UpdateNotice" parameterType="NoticeDTO">
+UPDATE NOTICE
+SET 
+title=#{title},
+notice_yn=#{notice_yn},
+contents=#{contents},
+chg_dt=now()
+WHERE 
+notice_seq=#{notice_seq}
+</update>
+
+
+
+
+ 
+</mapper>

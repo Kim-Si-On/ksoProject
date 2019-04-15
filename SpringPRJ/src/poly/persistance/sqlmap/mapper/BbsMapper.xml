@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.BbsMapper">
+	<select id="getBbsList" resultType="BbsDTO">
+	SELECT 
+		bbs_seq, 
+		title, 
+		contents,
+		user_id, 
+		read_cnt,
+		reg_id,
+		reg_dt,
+		chg_id,
+		chg_dt 
+	FROM 
+		BBS
+	</select>
+	
+	
+	<select id="getBbs" parameterType="string" resultType="BbsDTO">
+	SELECT
+		bbs_seq,
+		title,
+		contents,
+		user_id, 
+		read_cnt,
+		reg_id,
+		reg_dt,
+		chg_id,
+		chg_dt 
+	FROM 
+		BBS
+	WHERE (bbs_seq = #{bbs})
+
+	</select>
+	
+	<select id="getBbsInfo" resultType="BbsDTO">
+	SELECT
+		bbs_seq,
+		title,
+		contents,
+		user_id, 
+		read_cnt,
+		reg_id,
+		reg_dt,
+		chg_id,
+		chg_dt 
+	FROM 
+		BBS
+		WHERE
+		bbs_seq=#{bbs_seq}
+	
+	</select>
+	
+	<insert id="InsertBbs" parameterType="BbsDTO" >
+	INSERT 
+	INTO BBS(
+	title,
+	contents,
+	user_id,
+	reg_id,
+	reg_dt
+	)
+	VALUES (
+	#{title},
+	#{contents},
+	#{user_id},
+	#{user_id},
+	sysDate()
+	)
+</insert>
+	
+<!-- 자유게시판 삭제 -->	
+<delete id="DeleteBbs" parameterType="BbsDTO">
+DELETE FROM BBS WHERE bbs_seq=#{bbs_seq}
+</delete>
+	
+<!-- 자유게시판 수정 -->
+<update id ="UpdateBbs" parameterType="BbsDTO">
+UPDATE BBS
+SET 
+title=#{title},
+contents=#{contents},
+chg_dt=now()
+WHERE 
+bbs_seq=#{bbs_seq}
+</update>
+
+	
+
+	
+</mapper>

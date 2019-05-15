@@ -142,7 +142,7 @@ for (int i=0;i<rList.size();i++){
 </table>
 	<%if(SESSION_USER_SEQ.equals("1")){%>
 	<a class="btn btn-success pull-right" href="/notice/NoticeReg.do">±Û¾²±â</a>
-	<%}else{ %>
+	<%}else{  %>
 	
 	<%} %>
 	</div>

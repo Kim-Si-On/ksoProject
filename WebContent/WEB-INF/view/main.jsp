@@ -112,7 +112,7 @@ body, html {
   <div class="hero-text">
     <h1 style="font-size:70px">Reservist</h1>
     <p>대한민국 예비군들을 위한 지도 제공 홈페이지 </p>
-    <a href="#about" class="btn btn-primary js-scroll-trigger">자세히 알아보기</a>
+    <a href="#about" class="btn btn-success js-scroll-trigger">자세히 알아보기</a>
   </div>
   <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -139,33 +139,6 @@ body, html {
 		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
 	</div>
 </body>
-<section class="w3-container w3-center w3-content" style="max-width:600px">
-  <h2 class="w3-wide" align="center">Reservist</h2>
-  <p class="w3-justify">이 홈페이지는 전역을 하고 예비군인이 된 사람들을 위한 홈페이지입니다. 게시판은 총 3가지로 구성되어 있습니다. 1번째 공지사항이 있는 공지게시판, 2번째 자유롭게 글을 쓸 수 있는 자유게시판, 그리고 3번째 에비군훈련장을 모르는 예비군들을 위한 맞춤 지도 찾기가 있습니다. <br>
-  This page is for a Solider who discharge from the army and We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-</section>
-
-<!-- Band Members -->
-<section class="w3-row-padding w3-center w3-light-grey">
-  <article class="w3-third">
-    <p>John</p>
-    <img src="images/1.jpg" alt="Random Name" style="width:50%">
-    <p>John is the smartest.</p>
-  </article>
-  <article class="w3-third">
-    <p>Paul</p>
-    <img src="images/2.jpg" alt="Random Name" style="width:50%">
-    <p>Paul is the prettiest.</p>
-  </article>
-  <article class="w3-third">
-    <p>Ringo</p>
-    <img src="images/3.jpg" alt="Random Name" style="width:50%">
-    <p>Ringo is the funniest.</p>
-  </article>
-</section>
-
-
-
 
  <script>
  

@@ -11,6 +11,8 @@ public interface NoticeMapper {
 	public List<NoticeDTO> getNoticeList() throws Exception;
 	
 	public void NoticeInfo(NoticeDTO nDTO) throws Exception;
+	
+	public int updateNoticeCount(String bno) throws Exception;
 
 	public int InsertNotice(NoticeDTO nDTO) throws Exception;
 	

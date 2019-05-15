@@ -98,6 +98,7 @@ public class BbsController {
 		BbsDTO bDTO = new BbsDTO();
 		bDTO = bbsService.getBbs(bbo);
 		
+		bbsService.updateBbsCount(bbo);
 		model.addAttribute("bDTO", bDTO);
 		
 		return "/bbs/BbsInfo";

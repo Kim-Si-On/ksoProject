@@ -158,6 +158,7 @@ function submit() {
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="비밀번호"
 							id="user_password" name="user_password" maxlength="20">
+							<div id="textChange"></div>
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="비밀번호 재입력"
@@ -180,5 +181,28 @@ function submit() {
 	</div>
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	 <script src="/js/bootstrap.min.js"></script>
+	 	<script>
+$("#user_password").keyup(function(){
+	var kim = $("#user_password").val();
+	var txtChange =$("#textChange");
+	
+	//정규식
+	if(!checkUnion(kim)){
+		txtChange.css('color','red');
+		txtChange.html("보안이 취약합니다.")
+	}else{
+		txtChange.css('color','green');
+		txtChange.html("적절한 비밀번호 입니다.")
+	}
+})
+	function checkUnion(str){
+		var reg1=/^[a-zA-Z0-9]{8,20}$/;//대문자 소만자 8 -20 자리 허용
+		var reg2=/[a-zA-Z]/g;
+		var reg3=/[0-9]/g;
+		return(reg1.test(str) && reg2.test(str) &&reg3.test(str))
+	}
+	</script>
+	 
+	 
 </body>
 </html>

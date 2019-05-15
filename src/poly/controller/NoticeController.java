@@ -58,9 +58,7 @@ public class NoticeController {
 		// 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
 		log.info(this.getClass().getName() + ".NoticeList start!");
 		
-		
-		
-		
+
 		// 공지사항 리스트 가져오기
 		
 		 List<NoticeDTO> rList = noticeService.getNoticeList(); 
@@ -95,7 +93,7 @@ public class NoticeController {
 		return "/notice/NoticeReg";
 
 	}
-
+ 
 	@RequestMapping(value = "notice/NoticeInfo", method = RequestMethod.GET)
 	public String NoticeInfo(HttpServletRequest request, HttpServletResponse response, ModelMap model)
 			throws Exception {
@@ -107,7 +105,8 @@ public class NoticeController {
 		
 		NoticeDTO nDTO = new NoticeDTO();
 		nDTO = noticeService.getNotice(bno);
-		
+
+		noticeService.updateNoticeCount(bno);
 		model.addAttribute("nDTO", nDTO);
 
 		return "/notice/NoticeInfo";
@@ -151,7 +150,7 @@ public class NoticeController {
 			
 			log.info("제목 "+ title);
 			log.info("내용 "+ contents);
-			log.info("내용 "+ user_id);
+			log.info("아이디 "+ user_id);
 
 			
 			result = noticeService.InsertNotice(nDTO);

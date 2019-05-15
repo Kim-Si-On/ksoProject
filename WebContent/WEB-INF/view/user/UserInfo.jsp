@@ -73,7 +73,7 @@ function doDelete(seq){
 }
 //목록으로 이동
 function doList(){
-	location.href="/main.do";
+	location.href="/user/UserList.do";
 		
 }
 

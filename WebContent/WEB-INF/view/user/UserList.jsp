@@ -70,7 +70,7 @@ function doDetail(seq) {
 			<ul class="nav navbar-nav">
 				<li><a href="/main.do">메인</a></li>
 				<li><a href="/notice/NoticeList.do">공지사항</a></li>
-				<li><a href="BbsList.do">자유게시판</a></li>
+				<li><a href="/bbs/BbsList.do">자유게시판</a></li>
 				<li><a href="board.jsp">예비군훈련장 안내</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">

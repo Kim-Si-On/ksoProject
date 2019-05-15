@@ -87,6 +87,13 @@ WHERE
 bbs_seq=#{bbs_seq}
 </update>
 
+<!-- 자유게시판 조회수 -->
+<update id="updateBbsCount" parameterType="string">
+UPDATE BBS
+SET read_cnt = read_cnt + 1
+WHERE
+bbs_seq=#{bbs_seq}
+</update>
 	
 
 	

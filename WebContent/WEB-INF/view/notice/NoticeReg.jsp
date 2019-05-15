@@ -17,7 +17,6 @@ System.out.println("ss_user_id : " + SESSION_USER_ID);
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<meta name="viewport" content="width=device-width" , initial-scale="1">
 <title>게시판 글쓰기</title>
 <link rel="stylesheet" href="/css/bootstrap.css">
 <script type="text/javascript">
@@ -35,45 +34,40 @@ function doOnload(){
 }
 
 //전송시 유효성 체크
-function doSubmit(f){
-	if(f.title.value == ""){
-		alert("제목을 입력하시기 바랍니다.");
-		f.title.focus();
-		return false;
+function submit() {
+
+	var Title = $("input[name=title]");
+	var Noticeyn = $("input[name=notice_yn]");
+	var Contents = $("textarea[name=contents]")
+
+	var joinSubmit =$("#joinSubmit");
+
+	if(Title.val()==""){
+	    alert("제목을 입력해 주세요"); 
+	    Title.focus();
+	    return false;
+	}
+
+	if(Noticeyn.val()==""){
+	    alert("공지여부를 체크해주세요"); 
+	    Noticeyn.focus();
+	    return false;
 	}
 	
-	if(calBytes(f.title.value) > 200){
-		alert("최대 200Bytes까지 입력 가능합니다.");
-		f.title.focus();
-		return false;
-	}	
-	
-	var noticeCheck = false; //체크 여부 확인 변수
-	for(var i=0;i<f.noticeYn.length;i++){
-		if (f.noticeYn[i].checked){
-			noticeCheck = true;
-		}
+	if(Contents.val()==""){
+	    alert("내용을 입력해 주세요"); 
+	    Contents.focus();
+	    return false;
 	}
-	
-	if(noticeCheck==false){
-		alert("공지글 여부를 선택하시기 바랍니다.");
-		f.noticeYn[0].focus();
-		return false;
-	}	
-	
-	if(f.contents.value == ""){
-		alert("내용을 입력하시기 바랍니다.");
-		f.contents.focus();
-		return false;
-	}	
-	
-	if(calBytes(f.contents.value) > 4000){
-		alert("최대 4000Bytes까지 입력 가능합니다.");
-		f.contents.focus();
-		return false;
-	}		
-	
-	
+
+
+
+	joinSubmit.submit();
+
+
+	}
+function reset(){
+	document.getElementById('joinSubmit').reset()
 }
 
 //글자 길이 바이트 단위로 체크하기(바이트값 전달)
@@ -97,40 +91,7 @@ function calBytes(str){
 	return tcount;
 }
 
-function submit() {
 
-	var Title = $("input[name=title]");
-	var notice_Yn = $("#notice_Yn");
-	var Contents = $("input[name=contents]")
-	
-
-
-	var joinSubmit =$("#joinSubmit");
-
-	if(Title.val() == ""){
-	    alert("제목 입력해 주세요"); 
-	    Title.focus();
-	    return false;
-	}
-
-	if(notice_Yn.val() == ""){
-	    alert("비밀번호를 입력해 주세요"); 
-	    notice_Yn.focus();
-	    return false;
-	}
-	
-	if(Contents.val() == ""){
-	    alert("제목 입력해 주세요"); 
-	    Contents.focus();
-	    return false;
-	}
-
-
-
-	joinSubmit.submit();
-
-
-	}
 
 </script>	
 </head>
@@ -173,38 +134,30 @@ function submit() {
 		</div>
 	</nav>
 
-
-
-
-
-
+	
+<div class="container" style="margin-top:30px;" >
+<h2>공지사항 글쓰기</h2>
 <form name="f" method="post" id="joinSubmit" action="/notice/Noticeinsert.do" target= "ifrPrc">
-	<table border="1">
-		<col width="100px" />
-		<col width="500px" />
-		<tr>
-			<td align="center">제목</td>
-			<td><input type="text" name="title" maxlength="100" style="width: 450px" /></td>
-		</tr>
-		<tr>
-			<td align="center">공지글 여부</td>
-			<td>예<input type="radio" name="notice_yn" value="1" />
-			        아니오<input type="radio" name="notice_yn" value="2" />
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<textarea name="contents" style="width: 550px; height: 400px"></textarea>
-			</td>
-		</tr>
-	<tr>
-		<td align="center" colspan="2">
-			<button type="button" onclick="submit()" class="btn btn-primary">등록</button>
-			<input type="reset" value="다시 작성" />
-		</td>
-	</tr>		
-	</table>
-</form>
+<input type="text"  class="form-control" id="title" name="title" placeholder="제목을 입력해주세요"><br>
+<div class="form-control" style="margin-bottom: 20px;" >
+	<div style="display: flex;justify-content: space-between;">
+	<div><b align="center">공지글 여부</b></div>
+	<div><b>예<input type="radio" name="notice_yn" id="notice_yn" value="1" />
+			       아니오<input type="radio" name="notice_yn" id="notice_yn" value="2" />
+	</b></div>
+	</div>	
+</div>	
+			
+	<textarea name="contents" id="contents" class="form-control" rows="20" placeholder="내용을 입력해주세요"></textarea><br>
+	
+	</form>
+	<div align="center">
+	<button type="button" onclick="submit()" class="btn btn-primary">등록</button>
+	<button type="button" onclick="reset()" class="btn btn-warning">다시 작성</button></div>
+
+</div>
+
+
 <!-- 프로세스 처리용 iframe / form 태그에서 target을 iframe으로 한다. -->
 <iframe name="ifrPrc" style="display:none"></iframe>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

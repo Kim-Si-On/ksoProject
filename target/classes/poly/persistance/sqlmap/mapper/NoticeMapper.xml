@@ -98,7 +98,12 @@ WHERE
 notice_seq=#{notice_seq}
 </update>
 
-
+<update id="updateNoticeCount" parameterType="string">
+UPDATE NOTICE
+SET read_cnt = read_cnt + 1
+WHERE 
+notice_seq=#{notice_seq}
+</update>
 
 
  

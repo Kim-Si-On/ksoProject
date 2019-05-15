@@ -34,10 +34,18 @@ public class BbsService implements IBbsService{
 	}
 	
 	@Override
+	public int updateBbsCount(String bbo) throws Exception {
+		
+		return bbsMapper.updateBbsCount(bbo);
+	}
+
+	
+	@Override
 	public int DeleteBbs(BbsDTO bDTO) throws Exception {
 	
 		return bbsMapper.DeleteBbs(bDTO);
 	}
+	
 	
 	@Override
 	public int UpdateBbs(BbsDTO bDTO) throws Exception {

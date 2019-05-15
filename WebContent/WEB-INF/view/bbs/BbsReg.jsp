@@ -32,32 +32,30 @@ function doOnload(){
 }
 
 //전송시 유효성 체크
-function doSubmit(f){
-	if(f.title.value == ""){
+function submit(){
+	
+	var Title = $("input[name=title]");
+	var Contents = $("textarea[name=contents]")
+	
+	var joinSubmit =$("#joinSubmit");
+	
+	if(Title.val() ==""){
 		alert("제목을 입력하시기 바랍니다.");
-		f.title.focus();
+		Title.focus();
 		return false;
 	}
 	
-	if(calBytes(f.title.value) > 200){
-		alert("최대 200Bytes까지 입력 가능합니다.");
-		f.title.focus();
-		return false;
-	}		
 	
-	if(f.contents.value == ""){
+	if(Contents.val() == ""){
 		alert("내용을 입력하시기 바랍니다.");
-		f.contents.focus();
+		Contents.focus();
 		return false;
-	}	
+	}			
 	
-	if(calBytes(f.contents.value) > 4000){
-		alert("최대 4000Bytes까지 입력 가능합니다.");
-		f.contents.focus();
-		return false;
-	}		
-	
-	
+	joinSubmit.submit();
+}
+function reset(){
+	document.getElementById('joinSubmit').reset()
 }
 
 //글자 길이 바이트 단위로 체크하기(바이트값 전달)
@@ -121,30 +119,22 @@ function calBytes(str){
 			</ul>
 		</div>
 	</nav>
-	
-	
-	
-<form name="f" method="post" action="/bbs/BbsInsert.do" target= "ifrPrc" onsubmit="return doSubmit(this);">
-	<table border="1">
-		<col width="100px" />
-		<col width="500px" />
-		<tr>
-			<td align="center">제목</td>
-			<td><input type="text" name="title" maxlength="100" style="width: 450px" /></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<textarea name="contents" style="width: 550px; height: 400px"></textarea>
-			</td>
-		</tr>
-	<tr>
-		<td align="center" colspan="2">
-			<input type="submit" value="등록" />
-			<input type="reset" value="다시 작성" />
-		</td>
-	</tr>		
-	</table>
+
+<div class="container" style="margin-top:30px;">
+<h2>자유게시판 글쓰기</h2>
+<form name="f" method="post" id="joinSubmit" action="/bbs/BbsInsert.do" target= "ifrPrc">
+<input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요"><br> 
+<textarea name="contents" id="contents" class="form-control" rows="20" placeholder="내용을 입력해주세요"></textarea><br>
+
+
 </form>
+<div align="center">
+	<button type="button" onclick="submit()" class="btn btn-primary">등록</button>
+	<button type="button" onclick="reset()" class="btn btn-warning">다시 작성</button></div>
+	
+</div>
+
+
 <!-- 프로세스 처리용 iframe / form 태그에서 target을 iframe으로 한다. -->
 <iframe name="ifrPrc" style="display:none"></iframe>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

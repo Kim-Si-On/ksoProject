@@ -47,10 +47,8 @@ if (ss_user_id.equals("")){
 //수정하기
 function doEdit(seq){
 	var user_id = "<%=SESSION_USER_ID%>";
-	
-	
-	
-	if (user_id=="<%=SESSION_USER_ID%>"){
+
+	if (user_id=="<%=CmmUtil.nvl(bDTO.getUser_id())%>"){
 		location.href="/bbs/BbsEditInfo.do?bSeq=<%=CmmUtil.nvl(bDTO.getBbs_seq())%>";
 	
 	}else if (user_id==""){
@@ -69,7 +67,7 @@ function doDelete(seq){
 	
 	
 	if (user_id=="<%=CmmUtil.nvl(bDTO.getUser_id())%>"){
-		if(confirm("작성한 글을 삭제하시겠습니까?")){
+		if(confirm("글을 삭제하시겠습니까?")){
 			location.href="/bbs/BbsDelete.do?bSeq=<%=CmmUtil.nvl(bDTO.getBbs_seq())%>";
 			
 		}
@@ -130,35 +128,45 @@ function doList(){
 		</div>
 	</nav>
 
+<div class="row">
+    <div class="col-xs-2 col-md-2"></div>
+    <div class="col-xs-8 col-md-8">
+    <h2 class="text-center">자유게시판</h2><p>&nbsp;</p>
+    <div class="table table-responsive">
+        <table class="table">
+        <tr>
+            <th class="success">제목</th>
+            <td colspan="3"><%=CmmUtil.nvl(bDTO.getTitle())%></td>
+        </tr>
+        <tr>
+     
+            <th class="success">조회수</th>
+            <td><%=CmmUtil.nvl(bDTO.getRead_cnt())%></td>
+        </tr>
+        <tr>
+            <th class="success">작성자</th>
+            <td><%=CmmUtil.nvl(bDTO.getUser_id())%></td>
+            <th class="success">작성일</th>
+            <td><%=CmmUtil.nvl(bDTO.getReg_dt())%></td>
+            
+        </tr>
+        <tr>
+          <td colspan="4" height="300px" valign="top"><%=CmmUtil.nvl(bDTO.getContents()).replaceAll("\r\n", "<br/>") %></td>
+        </tr>
+        <tr>
+          <td colspan="4" class="text-center">
+            
+    <input type="button" class="btn btn-warning" value="수정하기" onclick="javascript:doEdit();" >          
+<input type="button" class="btn btn-danger" value="삭제하기" onclick="javascript:doDelete();">
+<input type="button" class="btn btn-primary" value="목록보기" onclick="javascript:doList();">
+            </td>
+        </tr>
+    </table>
+   </div>     
+ </div>
+</div>
 
-<table border="1">
-	<col width="100px" />
-	<col width="200px" />
-	<col width="100px" />
-	<col width="200px" />
-	<tr>
-		<td align="center">제목</td>
-		<td colspan="3"><%=CmmUtil.nvl(bDTO.getTitle())%></td>
-	</tr>
-	<tr>
-		<td align="center">작성일</td>
-		<td><%=CmmUtil.nvl(bDTO.getReg_dt())%></td>
-		<td align="center">조회수</td>
-		<td><%=CmmUtil.nvl(bDTO.getRead_cnt())%></td>
-	</tr>	
-	<tr>
-		<td colspan="4" height="300px" valign="top">
-		<%=CmmUtil.nvl(bDTO.getContents()).replaceAll("\r\n", "<br/>") %>
-		</td>
-	</tr>
-<tr>
-	<td align="center" colspan="4">
-		<a href="javascript:doEdit();">[수정]</a>
-		<a href="javascript:doDelete();">[삭제]</a>
-		<a href="javascript:doList();">[목록]</a>
-	</td>
-</tr>		
-</table>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 </body>

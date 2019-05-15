@@ -13,16 +13,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/bootstrap.css">
 <title>join</title>
+
 <script type="text/javascript">
 <%if(SESSION_USER_ID==""){%>
 <%}else{%>
 alert("잘못된 접근입니다.");
 top.location.href="/main.do";
 <%}%>
-
-
-
-
 
 function submit() {
     
@@ -32,7 +29,7 @@ function submit() {
     var username = $("input[name=user_name]");
     var usergender = $("input[name=user_gender]");
     var useremail = $("input[name=user_email]");
-    var userbirthday = $("#user_birthday");
+    var userbirthday = $("input[name=user_birthday]");
     var userbirthday2 = $("#user_birthday2");
     var userbirthday3 = $("#user_birthday3");
     var userphoneNumber = $("input[name=user_phoneNumber]");
@@ -107,6 +104,8 @@ function submit() {
     
 }
 
+
+
 </script>
 </head>
 <body>
@@ -147,11 +146,15 @@ function submit() {
 					<h3 style="text-align: center;">회원가입</h3>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="아이디"
-							name="user_id" maxlength="20">
+							name="user_id" id="user_id" maxlength="20">
+							<button type="button" onclick="" class="btn btn-success">아이디 중복확인 </button>
 					</div>
+					
 					<div class="form-group">
+						
 						<input type="password" class="form-control" placeholder="비밀번호"
 						 id="user_password"	name="user_password" maxlength="20">
+						 <div id="textChange"></div>
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="비밀번호 재입력"
@@ -203,7 +206,7 @@ function submit() {
 							<%
 								}
 							%>
-						</select>
+						</select><br><br>
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="전화번호" id="user_phoneNumber"
@@ -216,8 +219,29 @@ function submit() {
 		</div>
 		<div class="col-lg-4"></div>
 	</div>
-
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	
+	<script>
+$("#user_password").keyup(function(){
+	var kim = $("#user_password").val();
+	var txtChange =$("#textChange");
+	
+	//정규식
+	if(!checkUnion(kim)){
+		txtChange.css('color','red');
+		txtChange.html("보안이 취약합니다.")
+	}else{
+		txtChange.css('color','green');
+		txtChange.html("적절한 비밀번호 입니다.")
+	}
+})
+	function checkUnion(str){
+		var reg1=/^[a-zA-Z0-9]{8,20}$/;//대문자 소만자 8 -20 자리 허용
+		var reg2=/[a-zA-Z]/g;
+		var reg3=/[0-9]/g;
+		return(reg1.test(str) && reg2.test(str) &&reg3.test(str))
+	}
+	</script>
 </body>
 </html>

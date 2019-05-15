@@ -11,6 +11,8 @@ public interface BbsMapper {
 	public List<BbsDTO> getBbsList() throws Exception;
 	
 	public void BbsInfo (BbsDTO bDTO) throws Exception;
+	
+	public int updateBbsCount(String bbo) throws Exception;
 
 	public int InsertBbs(BbsDTO bDTO) throws Exception;
 	

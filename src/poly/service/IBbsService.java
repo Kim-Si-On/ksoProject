@@ -13,6 +13,8 @@ public interface IBbsService {
 	
 	public List<BbsDTO> getBbsList() throws Exception;
 	
+	public int updateBbsCount(String bbo) throws Exception;
+	
 	public BbsDTO getBbs(String bbo) throws Exception;
 
 	//자유게시판 삭제

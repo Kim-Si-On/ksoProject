@@ -34,6 +34,14 @@ public class NoticeService implements INoticeService{
 	}
 	
 	@Override
+	public int updateNoticeCount(String bno) throws Exception {
+		
+		return noticeMapper.updateNoticeCount(bno);
+	}
+	
+	
+	
+	@Override
 	public int DeleteNotice(NoticeDTO nDTO) throws Exception {
 	
 		return noticeMapper.DeleteNotice(nDTO);

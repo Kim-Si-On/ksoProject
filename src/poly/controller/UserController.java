@@ -379,6 +379,7 @@ public class UserController {
 
 				int result = 0;
 				String usr = CmmUtil.nvl((String) session.getAttribute("user_seq"));
+				String sessionUsr = CmmUtil.nvl((String) session.getAttribute("user_seq"));
 				if(usr.equals("1")) {
 					usr=request.getParameter("uSeq");
 				}
@@ -404,13 +405,18 @@ public class UserController {
 					
 				}
 					
-				String msg = "회원을 탈퇴하셨습니다. 이용해주셔서 감사합니다";
-				String url = "/main.do";
+				String msg = "계정을 삭제하였습니다.";
+				String url = "/user/UserList.do";
+				
+				if(!sessionUsr.equals("1")) {
+					session.invalidate();
+					url = "/main.do";
+					msg = "회원을 탈퇴하셨습니다. 이용해주셔서 감사합니다";
+				}
 				model.addAttribute("msg",msg);
 				model.addAttribute("url",url);
-				session.invalidate();
 				return "/alert";
-				}	
+			}	
 			
 			//회원정보 수정
 			@RequestMapping(value="/user/UserUpdate", method = RequestMethod.POST)

@@ -1,24 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<%@ page import="poly.util.CmmUtil" %>
-<%@ page import="poly.dto.NoticeDTO" %>
+<%@ page import="poly.util.CmmUtil"%>
+<%@ page import="poly.dto.NoticeDTO"%>
 <%
-NoticeDTO nDTO = (NoticeDTO)request.getAttribute("nDTO");
+	NoticeDTO nDTO = (NoticeDTO) request.getAttribute("nDTO");
 
-//공지글 정보를 못불러왔다면, 객체 생성
-if (nDTO==null){
-	nDTO = new NoticeDTO();
+	//공지글 정보를 못불러왔다면, 객체 생성
+	if (nDTO == null) {
+		nDTO = new NoticeDTO();
 
-}
+	}
 %>
 <%
-request.setCharacterEncoding("EUC-KR");
+	request.setCharacterEncoding("EUC-KR");
 
-String SESSION_USER_ID =CmmUtil.nvl((String) session.getAttribute("user_id"));
-String SESSION_USER_SEQ = CmmUtil.nvl((String) session.getAttribute("user_seq"));
-System.out.println("ss_user_seq : " + CmmUtil.nvl((String) session.getAttribute("user_seq")));
-System.out.println("ss_user_id : " + SESSION_USER_ID);
-%>  
+	String SESSION_USER_ID = CmmUtil.nvl((String) session.getAttribute("user_id"));
+	String SESSION_USER_SEQ = CmmUtil.nvl((String) session.getAttribute("user_seq"));
+	System.out.println("ss_user_seq : " + CmmUtil.nvl((String) session.getAttribute("user_seq")));
+	System.out.println("ss_user_id : " + SESSION_USER_ID);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,142 +35,149 @@ function doOnload(){
 	if (user_id!="<%=CmmUtil.nvl(nDTO.getUser_id())%>"){
 		alert("작성자만 수정할 수 있습니다.");
 		location.href="/notice/NoticeInfo.do?nSeq=<%=CmmUtil.nvl(nDTO.getNotice_seq())%>";
-		
-	}
-}
 
-//전송시 유효성 체크
-function doSubmit(f){
-	if(f.title.value == ""){
-		alert("제목을 입력하시기 바랍니다.");
-		f.title.focus();
-		return false;
-	}
-	
-	if(calBytes(f.title.value) > 200){
-		alert("최대 200Bytes까지 입력 가능합니다.");
-		f.title.focus();
-		return false;
-	}	
-	
-	
-	if(f.contents.value == ""){
-		alert("내용을 입력하시기 바랍니다.");
-		f.contents.focus();
-		return false;
-	}	
-	
-	if(calBytes(f.contents.value) > 4000){
-		alert("최대 4000Bytes까지 입력 가능합니다.");
-		f.contents.focus();
-		return false;
-	}		
-	
-	
-}
-
-//글자 길이 바이트 단위로 체크하기(바이트값 전달)
-function calBytes(str){
-	
-	var tcount = 0;
-	var tmpStr = new String(str);
-	var strCnt = tmpStr.length;
-
-	var onechar;
-	for (i=0;i<strCnt;i++){
-		onechar = tmpStr.charAt(i);
-		
-		if (escape(onechar).length > 4){
-			tcount += 2;
-		}else{
-			tcount += 1;
 		}
 	}
-	
-	return tcount;
-}
 
-</script>	
+	//전송시 유효성 체크
+	function doSubmit(f) {
+		if (f.title.value == "") {
+			alert("제목을 입력하시기 바랍니다.");
+			f.title.focus();
+			return false;
+		}
+
+		if (calBytes(f.title.value) > 200) {
+			alert("최대 200Bytes까지 입력 가능합니다.");
+			f.title.focus();
+			return false;
+		}
+
+		if (f.contents.value == "") {
+			alert("내용을 입력하시기 바랍니다.");
+			f.contents.focus();
+			return false;
+		}
+
+		if (calBytes(f.contents.value) > 4000) {
+			alert("최대 4000Bytes까지 입력 가능합니다.");
+			f.contents.focus();
+			return false;
+		}
+
+	}
+
+	//글자 길이 바이트 단위로 체크하기(바이트값 전달)
+	function calBytes(str) {
+
+		var tcount = 0;
+		var tmpStr = new String(str);
+		var strCnt = tmpStr.length;
+
+		var onechar;
+		for (i = 0; i < strCnt; i++) {
+			onechar = tmpStr.charAt(i);
+
+			if (escape(onechar).length > 4) {
+				tcount += 2;
+			} else {
+				tcount += 1;
+			}
+		}
+
+		return tcount;
+	}
+</script>
 </head>
 <body onload="doOnload();">
 
-<nav class="navbar navbar-default">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#bs-example-navar-collapse-1"
-				aria-expanded="fasle">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand">JSP 게시판 웹 사이트</a>
-		</div>
-		<div class="collapse navbar-collapse" id="bs-example-navar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="/main.do">메인</a></li>
-				<li><a href="/notice/NoticeList.do">공지사항</a></li>
-				<li><a href="/bbs/BbsList.do">자유게시판</a></li>
-				<li><a href="board.jsp">예비군훈련장 안내</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">접속하기<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-					<%if(SESSION_USER_SEQ==""){ %>
-						<li class="active"><a href="/user/user_login.do">로그인</a></li>
-						<li><a href="/user/user_join.do">회원가입</a></li>
-						<%}else if(SESSION_USER_SEQ.equals("1")){%>
-						<li class="active"><a href="/user/logout.do">로그아웃</a></li>
-						<li><a href="/user/UserList.do">회원리스트</a></li>
-						<%}else{ %>
-						<li class="active"><a href="/user/logout.do">로그아웃</a></li>
-						<li><a href="/user/UserInfo.do">내 정보</a></li>
-						<%} %>
-					</ul>
-				</li>
-			</ul>
-		</div>
+	<nav class="navbar navbar-default">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed"
+			data-toggle="collapse" data-target="#bs-example-navar-collapse-1"
+			aria-expanded="fasle">
+			<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand">JSP 게시판 웹 사이트</a>
+	</div>
+	<div class="collapse navbar-collapse" id="bs-example-navar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li><a href="/main.do">메인</a></li>
+			<li><a href="/notice/NoticeList.do">공지사항</a></li>
+			<li><a href="/bbs/BbsList.do">자유게시판</a></li>
+			<li><a href="board.jsp">예비군훈련장 안내</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown" role="button" aria-haspopup="true"
+				aria-expanded="false">접속하기<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<%
+						if (SESSION_USER_SEQ == "") {
+					%>
+					<li class="active"><a href="/user/user_login.do">로그인</a></li>
+					<li><a href="/user/user_join.do">회원가입</a></li>
+					<%
+						} else if (SESSION_USER_SEQ.equals("1")) {
+					%>
+					<li class="active"><a href="/user/logout.do">로그아웃</a></li>
+					<li><a href="/user/UserList.do">회원리스트</a></li>
+					<%
+						} else {
+					%>
+					<li class="active"><a href="/user/logout.do">로그아웃</a></li>
+					<li><a href="/user/UserInfo.do">내 정보</a></li>
+					<%
+						}
+					%>
+				</ul></li>
+		</ul>
+	</div>
 	</nav>
 
 
-<h2>글 수정!</h2>
-<form name="f" method="post" action="/notice/NoticeUpdate.do" onsubmit="return doSubmit(this);">
-<input type="hidden" name="nSeq" value="<%=CmmUtil.nvl(request.getParameter("nSeq")) %>" />
-	<table border="1">
-		<col width="100px" />
-		<col width="500px" />
-		<tr>
-			<td align="center">제목</td>
-			<td>
-			<input type="text" name="title" maxlength="100" 
-				   value="<%=CmmUtil.nvl(nDTO.getTitle()) %>" style="width: 450px"/>
-			</td>
-		</tr>
-		<tr>
-			<td align="center">공지글 여부</td>
-			<td>
-				예<input type="radio" name="notice_yn" value="1"
-						<%=CmmUtil.checked(CmmUtil.nvl(nDTO.getNotice_yn()), "1") %>	/>
-			        아니오<input type="radio" name="notice_yn" value="2" 
-			        	<%=CmmUtil.checked(CmmUtil.nvl(nDTO.getNotice_yn()), "2") %>	/>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<textarea 
-						name="contents" style="width: 550px; height: 400px"
-						><%=CmmUtil.nvl(nDTO.getContents()) %></textarea>
-			</td>
-		</tr>
-	<tr>
-		<td align="center" colspan="2">
-			<input type="submit" value="수정" />
-			<input type="reset" value="다시 작성" />
-		</td>
-	</tr>		
-	</table>
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-</form>	
+
+
+	<div class="container" style="margin-top: 30px;">
+		<h2>공지사항 글수정</h2>
+		<form name="f" method="post" id="joinSubmit"
+			action="/notice/NoticeUpdate.do" onsubmit="return doSubmit(this);">
+			<input type="hidden" name="nSeq"
+				value="<%=CmmUtil.nvl(request.getParameter("nSeq"))%>" /> <input
+				type="text" class="form-control" name="title" id="btnSuc"
+				value="<%=CmmUtil.nvl(nDTO.getTitle())%>" /><br>
+
+
+			<div class="form-control" style="margin-bottom: 20px;">
+				<div style="display: flex; justify-content: space-between;">
+					<div>
+						<b align="center">공지글 여부</b>
+					</div>
+					<div>
+						<b>예<input type="radio" name="notice_yn" value="1"
+						<%=CmmUtil.checked(CmmUtil.nvl(nDTO.getNotice_yn()), "1") %>	/> 
+						아니오<input type="radio" name="notice_yn" value="2" 
+						<%=CmmUtil.checked(CmmUtil.nvl(nDTO.getNotice_yn()), "2") %> 	/>
+						</b>
+					</div>
+				</div>
+			</div>
+
+			<textarea name="contents" class="form-control" rows="20"><%=CmmUtil.nvl(nDTO.getContents())%></textarea>
+			<br>
+
+			<div align="center">
+				<button type="button" onclick="submit()" class="btn btn-primary">수정</button>
+				<button type="reset" class="btn btn-warning">다시 작성</button>
+			</div>
+		</form>
+	</div>
+
+
+	<iframe name="ifrPrc" style="display: none"></iframe>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	
 </body>
 </html>

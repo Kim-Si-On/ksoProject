@@ -73,6 +73,11 @@
 	WHERE USER_ID=#{user_id} AND USER_NAME=#{user_name} AND USER_EMAIL=#{user_email}	
 </select>
 
+<select id="getUseridCheck" parameterType="string" resultType="int">
+SELECT COUNT(*)
+FROM USER_INFO
+WHERE USER_ID=#{user_id}
+</select>
 
 
 <select id="getUserInfo" parameterType="string" resultType="UserDTO">

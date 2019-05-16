@@ -67,5 +67,13 @@ public class UserService implements IUserService{
 			return userMapper.UpdateUser(uDTO);
 		}
 		
+		@Override
+		public int getUseridCheck(String id) throws Exception {
+			
+			return userMapper.getUseridCheck(id);
+		}
+		
+		
+		
 		
 }

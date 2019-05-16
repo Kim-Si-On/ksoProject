@@ -29,5 +29,7 @@ public interface IUserService {
 	//회원정보 수정
 	public int UpdateUser(UserDTO uDTO) throws Exception;
 	
+	public int getUseridCheck(String id) throws Exception;
+	
 
 }

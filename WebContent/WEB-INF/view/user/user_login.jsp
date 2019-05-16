@@ -86,7 +86,7 @@ joinSubmit.submit();
 	<div class="container">
 	<div class="col-lg-4"></div>
 	<div class="col-lg-4">
-		<div class="jumbotron" style="padding-top: 20px">
+		<div class="jumbotron" style="padding-top: 20px; padding-left: 30px; padding-right: 30px">
 			<form method="post" id="joinSubmit" action="/user/user_login_Action.do">
 				<h3 style="text-align: center;">·Î±×ÀÎ</h3>
 				<div class="form-group">

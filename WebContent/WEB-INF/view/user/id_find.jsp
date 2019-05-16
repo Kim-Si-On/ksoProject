@@ -99,6 +99,9 @@ top.location.href="/main.do";
 			method: 'GET' ,
 			success:function(data){
 				console.log(data)
+				if (data=="")
+				content = '<h3> 존재하지 않는 아이디입니다.</h3>'
+				else
 				content += '<h3> 회원님의 아이디는 '+data+' 입니다.</h3>'
 				changeCont.html(content)
 			},

@@ -23,4 +23,6 @@ public interface UserMapper {
 	public int DeleteUser(UserDTO uDTO) throws Exception;
 	
 	public int UpdateUser(UserDTO uDTO) throws Exception;
+	
+	public int getUseridCheck(String id) throws Exception;
 }

@@ -239,6 +239,28 @@ public class UserController {
 				
 				
 			}
+		
+		//회원 체크
+		@RequestMapping(value="user/userChecked")
+		@ResponseBody // ajax사용을 위해 지정해줘야됨 json으로 넘어온 email 매개변수 사용Map<Object,Object>@RequestBody String email
+		public void getUseridCheck(HttpServletRequest req,HttpServletResponse res) throws Exception{
+			String id=CmmUtil.nvl(req.getParameter("user_id"));
+			
+			
+			int count=0;// 이메일 중복을 체크하기 위한 변수선언
+			//Map<Object, Object> map = new HashMap<Object,Object>();
+			
+			count = userService.getUseridCheck(id);
+			
+			
+			log.info(count);
+			
+			//getwriter 는  한개만 보낼때
+			res.getWriter().println(count);
+			//map.put("cnt", count);		
+		}
+
+		
 	
 
 	

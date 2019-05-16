@@ -37,7 +37,7 @@ function doOnload(){
 function submit() {
 
 	var Title = $("input[name=title]");
-	var Noticeyn = $("input[name=notice_yn]");
+	var noticeYn = $("input[name=notice_yn]");
 	var Contents = $("textarea[name=contents]")
 
 	var joinSubmit =$("#joinSubmit");
@@ -48,11 +48,18 @@ function submit() {
 	    return false;
 	}
 
-	if(Noticeyn.val()==""){
-	    alert("공지여부를 체크해주세요"); 
-	    Noticeyn.focus();
-	    return false;
+	var noticeCheck = false; //체크 여부 확인 변수
+	for(var i=0;i<noticeYn.length;i++){
+		if (noticeYn[i].checked){
+			noticeCheck = true;
+		}
 	}
+	
+	if(noticeCheck==false){
+		alert("공지글 여부를 선택하시기 바랍니다.");
+		noticeYn[0].focus();
+		return false;
+	}	
 	
 	if(Contents.val()==""){
 	    alert("내용을 입력해 주세요"); 
